@@ -1,5 +1,5 @@
 public class Ticket implements Comparable {
-    private int _priority;
+    private final int _priority;
     private String _descrip;
     private String _name;
     private boolean _resolved;
@@ -27,5 +27,9 @@ public class Ticket implements Comparable {
 
     //-------------MUTATORS--------------
 
+    public void resolve(){ _resolved = true; }
+
+    //-----------------------------------
+
     
-}
+}//end class Ticket
