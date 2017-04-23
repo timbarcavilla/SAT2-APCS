@@ -1,4 +1,4 @@
-public class Ticket implements Comparable {
+public class Ticket implements Comparable<Ticket> {
     private final int _priority;
     private String _descrip;
     private String _name;
@@ -8,7 +8,7 @@ public class Ticket implements Comparable {
     
     public Ticket(int priority, String descrip, String name, boolean _resolved, int id ){
 	_priority = priority;
-	_description = descrip;
+	_descrip = descrip;
 	_name = name;
 	_resolved = false;
 	_id = id;
@@ -31,5 +31,23 @@ public class Ticket implements Comparable {
 
     //-----------------------------------
 
+
+    //toString
+    public String toString(){
+	String retstr = "";
+	retstr += "=========================================\n";
+	retstr += "Name: " + _name + "\n";
+	retstr += "Description: " + _descrip + "\n";
+	retstr += "ID#: " + _id + "\n";
+	return retstr;
+    }
+
+    public int compareTo(Ticket t){
+	if (this.getPriority() > t.getPriority())
+	    return 1;
+	else if (this.getPriority() < t.getPriority())
+	    return -1;
+	return 0;
+    }
     
 }//end class Ticket
