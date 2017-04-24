@@ -5,9 +5,11 @@ public class HelpDesk{
 
     private ArrayPriorityQueue<Ticket> _queue;
     private ArrayList<Ticket> _resolvedBin;
+
     private final String[] bunchOfSolution = {"Check your connection.", "Press that button thingy on your computer", "Reset the setting.", "Restart your computer", "Go to google.com and figure it out yourself.", "Consult the java API", "Consult NetLogo Dictionary", "Press Ctrl+Alt+Delete to open Task Manager.", "I don't know, I'm not that smart!", "Kill it with fire."};
+
     private int id;
-    private static boolean _exit;
+    private boolean _exit;
 
     public HelpDesk(){
 	_queue = new ArrayPriorityQueue<Ticket>();
@@ -16,7 +18,7 @@ public class HelpDesk{
 	_exit = false;
     }
 
-    //use to track tickets in the queue
+    //use to track tickets by ID number in the queue
     public Ticket track(int idNum){
 	for (int x = 0; x < _queue.size(); x++){
 	    if (_queue.get(x).getID() == idNum)
@@ -70,8 +72,10 @@ public class HelpDesk{
 	if (mode == 1){
 	    System.out.print("Describe your problem: ");
 	    String descrip = Keyboard.readString();
+
 	    System.out.print("\nWhat is your name? ");
 	    String name = Keyboard.readString();
+
 	    System.out.println("\nHow urgent is the problem, " + name + " ?");
 	    String msg = "";
 	    msg += "\t1) I AM THE QUEEN OF ENGLAND FIX THIS FOR ME\n";
@@ -80,14 +84,17 @@ public class HelpDesk{
 	    msg += "\t4) Take your time\n";
 	    msg += "\t5) Don't worry too much I live in a tree anyway.";
 	    System.out.println(msg);
+
 	    int priority = Keyboard.readInt()-1;
 	    Ticket newTik = new Ticket(priority,name,descrip,false,id);
 	    _queue.add(newTik);
+
 	    System.out.println("Submission completed. We will get back to you as soon as possible. Please copy down your ID# in order to track your ticket: " + id + ".");
 	    id++;
 	}
 	
 	else if (mode == 2){
+	    /*
 	    System.out.println("Is your ticket resolved or still in the queue?");
 	    String msg = "";
 	    msg += "\t1) Resolved\n";
@@ -99,9 +106,26 @@ public class HelpDesk{
 		if (choice < 1 || choice > 2)
 		    choice = 0;
 	    }
+	    */
 	    System.out.println("What's your ticket's ID?");
 	    int yourID = Keyboard.readInt();
 	    Ticket yourTik;
+	    yourTik = find(yourID);
+	    if (yourTik != null){
+		System.out.println("Voila! Here's your ticket's info:\n" + yourTik);
+	    }
+	    else {
+		yourTik = track(yourID);
+		if (yourTik != null){
+		    System.out.println("Voila! Here's your ticket's info:\n" + yourTik);
+		}
+		else {
+		    System.out.println("No ticket with this ID exists!");		    
+		}
+	    }
+	    
+				 
+	    /*
 	    if (choice == 1)
 		yourTik = find(yourID);
 	    else
@@ -110,6 +134,7 @@ public class HelpDesk{
 		System.out.println("No ticket with this ID exists!");
 	    else
 		System.out.println("Voila! Here's your ticket's info:\n" + yourTik);
+	    */
 	}
 
 	else if (mode == 3){
@@ -126,12 +151,15 @@ public class HelpDesk{
 	else if (mode == 4)
 	    _exit = true;
     }
-    
+
+    public boolean getExit(){
+	return _exit;
+    }
 
     public static void main(String[] args){
 
 	HelpDesk h = new HelpDesk();
-	while (!_exit){
+	while (!(h. getExit())){
 	    int mode = h.setup();
 	    h.action(mode);
 	}
