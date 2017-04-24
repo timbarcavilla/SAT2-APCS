@@ -11,6 +11,14 @@ public class ArrayPriorityQueue<T> implements PriorityQueue<T>
 	_data = new ArrayList<T>();
     }
 
+    public T get(int i){
+	return _data.get(i);
+    }
+
+    public int size(){
+	return _size;
+    }
+    
     public void add( T x )
     {
 	T val = x;

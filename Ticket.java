@@ -3,6 +3,7 @@ public class Ticket implements Comparable<Ticket> {
     private String _descrip;
     private String _name;
     private boolean _resolved;
+    private String _solution;
     private final int _id;
 
     
@@ -12,6 +13,7 @@ public class Ticket implements Comparable<Ticket> {
 	_name = name;
 	_resolved = false;
 	_id = id;
+	_solution = "N/A";
 	
     }
 
@@ -28,6 +30,7 @@ public class Ticket implements Comparable<Ticket> {
     //-------------MUTATORS--------------
 
     public void resolve(){ _resolved = true; }
+    public void setSolution(String solve){ _solution = solve; }
 
     //-----------------------------------
 
@@ -39,6 +42,7 @@ public class Ticket implements Comparable<Ticket> {
 	retstr += "Name: " + _name + "\n";
 	retstr += "Description: " + _descrip + "\n";
 	retstr += "ID#: " + _id + "\n";
+	retstr += "Solution: " + _solution + "\n";
 	return retstr;
     }
 
