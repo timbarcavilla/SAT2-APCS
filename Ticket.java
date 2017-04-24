@@ -1,9 +1,11 @@
 public class Ticket implements Comparable<Ticket> {
-    private final int _priority;
+    private int _priority;
     private String _descrip;
     private String _name;
     private boolean _resolved;
     private String _solution;
+
+    //final bc it should only be set once 
     private final int _id;
 
     
@@ -46,11 +48,14 @@ public class Ticket implements Comparable<Ticket> {
 	return retstr;
     }
 
+    //compares based on _priority 
     public int compareTo(Ticket t){
 	if (this.getPriority() > t.getPriority())
 	    return 1;
+	
 	else if (this.getPriority() < t.getPriority())
 	    return -1;
+
 	return 0;
     }
     
